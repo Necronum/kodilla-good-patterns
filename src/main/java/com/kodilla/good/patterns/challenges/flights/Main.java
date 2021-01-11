@@ -1,17 +1,23 @@
 package com.kodilla.good.patterns.challenges.flights;
 
-import com.kodilla.good.patterns.challenges.flights.service.FlightProcessor;
-import com.kodilla.good.patterns.challenges.flights.service.FlightRequest;
-import com.kodilla.good.patterns.challenges.flights.service.FlightRequestRetriever;
+import com.kodilla.good.patterns.challenges.flights.service.Flight;
+import com.kodilla.good.patterns.challenges.flights.service.FlightService;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        FlightRequestRetriever flightRequestRetriever = new FlightRequestRetriever();
-        FlightRequest flightRequest = flightRequestRetriever.retrieve();
+        FlightService flightService = new FlightService();
+        System.out.println("All flights from Poznan: ");
+        List<Flight> flightsFromList = flightService.allFlightsFrom("Poznan");
+        System.out.println(flightsFromList);
 
-        FlightProcessor processor = new FlightProcessor();
-        processor.departureAirportFinder(flightRequest);
-        processor.arrivalAirportFinder(flightRequest);
-        processor.flightThroughFinder(flightRequest);
+        System.out.println("\nAll flight to Warszawa: ");
+        List<Flight> flightToList = flightService.allFlightsTo("Warszawa");
+        System.out.println(flightToList);
+
+        System.out.println("\nFlights from Poznan to Warszawa: ");
+        List<List<Flight>> flightList = flightService.inBetweenFlights("Poznan", "Warszawa");
+        System.out.println(flightList);
     }
 }
